@@ -2,8 +2,8 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   GoogleAuthProvider,
-  signInWithRedirect,
   signInWithPopup,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -20,23 +20,30 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider();
+const googpeProvider = new GoogleAuthProvider();
 
-provider.getCustomParameters({
+googpeProvider.getCustomParameters({
   prompt: "select_account",
 });
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googpeProvider);
 
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalInformation = {}
+) => {
+  /* used additionalInformation = {} instead of additionalInformation 'cause during signIn with googlpopup
+    the only argument we are passing is only 'user' not the second argument
+    But in signUp(with email password) we can pass only email and password not the userName(or displayName)
+    so we need to pass the userName as second argument and it doesn't effect the signInWithGooglepopup
+  */
   const userDocRef = doc(db, "users", userAuth.uid);
-  //   console.log(userDocRef);
   const userSnapShot = await getDoc(userDocRef);
-  //   console.log(userSnapShot);
-  //   console.log(userSnapShot.exists());
 
   // if user with userAuth.uid doesn't exists then the userSnapSot.exists() will return 'false'
   // and to run 'if' statement we do '!userSnapShot.exists' so it becomes 'true'
@@ -48,10 +55,17 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createdAt,
+        ...additionalInformation,
       });
     } catch (error) {
       console.log("error occur creating user : ", error);
     }
   }
   return userDocRef;
+};
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
 };
