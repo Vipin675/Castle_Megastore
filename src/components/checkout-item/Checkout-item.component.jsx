@@ -1,6 +1,14 @@
 import React from "react";
 
-import "./checkout-item.styles.scss";
+import {
+  CheckoutItemContainer,
+  ImageContainer,
+  BaseSpan,
+  Quantity,
+  Arrow,
+  Value,
+  RemoveButton,
+} from "./checkout-item.styles.jsx";
 const CheckoutItem = ({
   cartItem,
   addToCart,
@@ -17,27 +25,21 @@ const CheckoutItem = ({
     clearFromCart(cartItem);
   };
   return (
-    <div className="checkout-item-container">
-      <div className="image-container">
+    <CheckoutItemContainer>
+      <ImageContainer>
         <img src={cartItem.imageUrl} alt={cartItem.name} />
-      </div>
-      <span className="name">{cartItem.name}</span>
+      </ImageContainer>
+      <BaseSpan>{cartItem.name}</BaseSpan>
 
-      <span className="quantity">
-        <div className="arrow" onClick={decreaseQuantityHandler}>
-          &#10094;
-        </div>
-        <span className="value">{cartItem.quantity}</span>
-        <div className="arrow" onClick={increaseQuantityHandler}>
-          &#10095;
-        </div>
-      </span>
+      <Quantity>
+        <Arrow onClick={decreaseQuantityHandler}>&#10094;</Arrow>
+        <Value>{cartItem.quantity}</Value>
+        <Arrow onClick={increaseQuantityHandler}>&#10095;</Arrow>
+      </Quantity>
 
-      <span className="price">{cartItem.price}</span>
-      <div className="remove-button" onClick={clearItemHandler}>
-        &#10005;
-      </div>
-    </div>
+      <BaseSpan>{cartItem.price}</BaseSpan>
+      <RemoveButton onClick={clearItemHandler}>&#10005;</RemoveButton>
+    </CheckoutItemContainer>
   );
 };
 

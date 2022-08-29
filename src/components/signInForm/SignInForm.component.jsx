@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import Button from "../button/Button.component";
+import { ButtonContainer, SignInContainer } from "./signInForm.styles.jsx";
+
+import Button, { BUTTON_TYPE_CLASSES } from "../button/Button.component";
 import FormInput from "../form-input/Form-input.component";
 import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
-import "./signInForm.styles.scss";
 
 const defaultFormFields = {
   email: "",
@@ -47,7 +48,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="sign-up-container">
+    <SignInContainer>
       <h2>Already have an account ?</h2>
       <span>Sign in with your email and password</span>
       <form
@@ -71,14 +72,21 @@ const SignInForm = () => {
           name="password"
           value={password}
         />
-        <div className="buttons-container">
-          <Button type="submit">Sign In</Button>
-          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
+        <ButtonContainer>
+          {/* <Button type="submit">Sign In</Button> */}
+          <Button buttonType={BUTTON_TYPE_CLASSES.base} type="submit">
+            Sign In
+          </Button>
+          <Button
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            type="button"
+            onClick={signInWithGoogle}
+          >
             Google Sign In
           </Button>
-        </div>
+        </ButtonContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 

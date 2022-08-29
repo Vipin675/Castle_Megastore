@@ -2,14 +2,14 @@ import React, { Fragment } from "react";
 import SignInForm from "../../components/signInForm/SignInForm.component";
 import SignUpForm from "../../components/signUpForm/SignUpForm.component";
 
-import "./authentication.styles.scss";
+import { AuthenticationContainer } from "./authentication.styles.jsx";
 const Authentication = () => {
   return (
     <Fragment>
-      <div className="authentication-container">
+      <AuthenticationContainer>
         <SignInForm />
         <SignUpForm />
-      </div>
+      </AuthenticationContainer>
     </Fragment>
   );
 };
