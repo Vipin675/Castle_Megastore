@@ -1,7 +1,7 @@
 import { CATEGORIES_ACTION_TYPES } from "./category.type";
 
 export const CATEGORY_INITIAL_STATE = {
-  categoriesMap: {},
+  categories: [],
 };
 
 export const categoriesReducers = (
@@ -11,8 +11,8 @@ export const categoriesReducers = (
   const { type, payload } = action;
 
   switch (type) {
-    case CATEGORIES_ACTION_TYPES.SET_CATEGORIES_MAP:
-      return { ...state, categoriesMap: payload };
+    case CATEGORIES_ACTION_TYPES.SET_CATEGORIES:
+      return { ...state, categories: payload };
     // return { ...state,  payload }; --- before i was using this that cause me problem that instead of updating the categoriesMap state becomes like
     //  {
     //    categoriesMap: {} ,
