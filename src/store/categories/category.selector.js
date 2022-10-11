@@ -18,3 +18,11 @@ export const selectCategoriesMap = createSelector(
       return accumulator;
     }, {})
 );
+
+export const selectCategoriesIsLoading = createSelector(
+  [selectCategoriesMapReducer],
+  (categoriesSlice) => {
+    console.log("------------------------------------", categoriesSlice);
+    return categoriesSlice.isLoading;
+  }
+);
