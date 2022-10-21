@@ -23,7 +23,7 @@ export const Body = styled.div`
   h2 {
     text-transform: uppercase;
     font-weight: bold;
-    margin: 0 6px 0;
+    margin: 0 6px;
     font-size: 22px;
     color: #4a4a4a;
   }
@@ -31,6 +31,15 @@ export const Body = styled.div`
   p {
     font-weight: lighter;
     font-size: 16px;
+  }
+
+  @media screen and (max-width: 800px) {
+    height: 80px;
+    padding: 0 20px;
+    h2 {
+      font-size: 18px;
+      margin: 0;
+    }
   }
 `;
 
@@ -68,5 +77,9 @@ export const CategoryDirectoryItemContainer = styled.div`
 
   &:last-child {
     margin-left: 7.5px;
+  }
+
+  @media screen and (max-width: 800px) {
+    height: 200px;
   }
 `;

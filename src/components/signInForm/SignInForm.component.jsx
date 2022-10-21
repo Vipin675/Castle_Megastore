@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ButtonContainer, SignInContainer } from "./signInForm.styles.jsx";
 
 import Button, { BUTTON_TYPE_CLASSES } from "../button/Button.component";
@@ -14,6 +15,7 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
+  const navigate = useNavigate();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
@@ -27,6 +29,7 @@ const SignInForm = () => {
     try {
       await signInAuthUserWithEmailAndPassword(email, password);
       setFormFields(defaultFormFields);
+      navigate("/");
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
@@ -45,6 +48,7 @@ const SignInForm = () => {
   // -------------------------------------------------------------------------
   const signInWithGoogle = async () => {
     await signInWithGooglePopup();
+    navigate("/");
   };
 
   return (
