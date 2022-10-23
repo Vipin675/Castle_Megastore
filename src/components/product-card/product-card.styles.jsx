@@ -59,7 +59,7 @@ export const ProductCardContainer = styled.div`
       opacity: 0.9;
       padding: 0 1px;
       position: absolute;
-      top: 260px;
+      top: 240px;
       font-size: 0.1rem;
     }
 
